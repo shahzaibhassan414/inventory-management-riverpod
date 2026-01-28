@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_flutter/Views/Auth/login_screen.dart';
 import '../../Constants/custom_fonts.dart';
 import '../../Providers/auth_service_provider.dart';
 import '../../main.dart';
@@ -117,7 +118,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Create your QuickBill account',
+                  'Create your account',
                   style: CustomFonts.subHeadingStyle,
                 ),
                 const SizedBox(height: 32),
@@ -215,6 +216,16 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           ),
                         ),
                       ),
+
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                           Navigator.pop(context);
+                          },
+                          child: const Text('Back to Sign In'),
+                        ),
+                      )
                     ],
                   ),
                 ),

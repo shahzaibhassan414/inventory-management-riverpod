@@ -21,40 +21,6 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Invoices'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () async {
-              showDialog(
-                context: context,
-                builder: (ctx) {
-                  return AlertDialog(
-                    title: Text('Logout'),
-                    content: Text('Are you sure you want to logout?'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(ctx),
-                        child: Text('No'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          Navigator.pop(ctx);
-                          await ref.read(authServiceProvider).signOut();
-                          ref.read(themeModeProvider.notifier).resetTheme();
-                          ref.invalidate(invoiceProvider);
-                          ref.invalidate(invoiceHistoryProvider);
-                          ref.invalidate(inventoryProvider);
-                          ref.invalidate(totalSalesProvider);
-                        },
-                        child: Text('Yes'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
@@ -146,14 +112,12 @@ class HomeScreen extends ConsumerWidget {
                     },
                     icon: Icon(
                       Icons.insights,
-                      color: theme.colorScheme.primary,
                     ),
                     label: Text(
                       'Insights',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: theme.colorScheme.primary,
                         letterSpacing: 0.5,
                       ),
                     ),

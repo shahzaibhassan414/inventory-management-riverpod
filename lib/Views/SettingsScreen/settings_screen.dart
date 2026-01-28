@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../Providers/auth_service_provider.dart';
+import '../../Providers/inventory_provider.dart';
+import '../../Providers/invoice_history_provider.dart';
+import '../../Providers/invoice_provider.dart';
 import '../../Providers/theme_mode_provider.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -37,6 +41,59 @@ class SettingsScreen extends ConsumerWidget {
                       },
                     ),
                   ],
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+                showDialog(
+                  context: context,
+                  builder: (ctx) {
+                    return AlertDialog(
+                      title: Text('Logout'),
+                      content: Text('Are you sure you want to logout?'),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () => Navigator.pop(ctx),
+                          child: Text('No'),
+                        ),
+                        SizedBox(height: 10,),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                          ),
+                          onPressed: () async {
+                            Navigator.pop(ctx);
+                            await ref.read(authServiceProvider).signOut();
+                            ref.read(themeModeProvider.notifier).resetTheme();
+                            ref.invalidate(invoiceProvider);
+                            ref.invalidate(invoiceHistoryProvider);
+                            ref.invalidate(inventoryProvider);
+                            ref.invalidate(totalSalesProvider);
+                          },
+                          child: Text('Yes'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Log out'),
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Icon(Icons.logout,size: 25,),
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),

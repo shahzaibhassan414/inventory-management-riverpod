@@ -72,20 +72,45 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Form(
             key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 50),
-                const Center(child: Icon(Icons.person, size: 80)),
-                const SizedBox(height: 40),
+                Center(
+                  child: SizedBox(
+                    height: 250,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.receipt_long_rounded,
+                          color: isDarkMode ? Colors.white70 : Colors.black87,
+                          size: 40,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                            'Riverpod',
+                            style: CustomFonts.mainHeadingStyle
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 Text("Login", style: CustomFonts.headingStyle),
-                const SizedBox(height: 30),
+                const SizedBox(height: 8),
+                Text(
+                  'Sign in to your account',
+                  style: CustomFonts.subHeadingStyle,
+                ),
+                const SizedBox(height: 32),
 
                 TextFormField(
                   controller: emailController,
@@ -109,7 +134,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 16),
 
                 // Password Field
                 TextFormField(
@@ -142,7 +167,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 16),
 
                 // Login Button
                 SizedBox(
