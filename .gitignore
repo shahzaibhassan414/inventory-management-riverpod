@@ -46,7 +46,7 @@ app.*.map.json
 # Firebase and Secrets (Recommended to ignore for public repositories)
 ios/Runner/GoogleService-Info.plist
 android/app/google-services.json
-# firebase_options.dart # Uncomment if you want to keep Firebase config private
+lib/firebase_options.dart
 .env*
 
 # Local properties for Android
